@@ -1,0 +1,24 @@
+node_modules
+.pnpm
+
+# build output
+dist
+build
+.tmp
+
+# logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# env files
+.env
+.env.*
+
+# IDE
+.vscode
+
+*.tsbuildinfo
+
+pnpm-lock.yaml

@@ -1,0 +1,29 @@
+node_modules
+.pnpm
+
+# build output
+dist
+build
+
+# logs
+*.log
+
+# env files
+.env
+.env.*
+
+# lock files
+pnpm-lock.yaml
+package-lock.json
+
+# IDE
+.vscode
+
+# img
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.pdf
