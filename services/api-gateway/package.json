@@ -2,17 +2,32 @@
   "name": "api-gateway",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/cluster.js",
+  "type": "module",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only server.ts",
+    "dev": "tsx watch src/cluster.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/cluster.js",
     "lint": "eslint src --ext .ts",
     "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.11.0"
+  "packageManager": "pnpm@10.11.0",
+  "dependencies": {
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "http-proxy-middleware": "^3.0.5",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.8.1",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19"
+  }
 }
 
