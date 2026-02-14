@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "pnpm -r run dev",
+    "build": "pnpm -r run build",
+    "start": "pnpm -r run start",
+    "lint": "pnpm -r run lint",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -22,3 +26,4 @@
     "typescript": "^5.9.3"
   }
 }
+
