@@ -5,7 +5,7 @@ import { verifyJWT } from '../utils/jwt.js';
 
 const publicKeyPath = fromRoot('keys', 'public.pem');
 
-function jwtAuth(req: Request, res: Response, next: NextFunction) {
+export function jwtAuth(req: Request, res: Response, next: NextFunction) {
   const token = req.headers.authorization?.split(' ')[1];
 
   if (!token) {
@@ -22,6 +22,4 @@ function jwtAuth(req: Request, res: Response, next: NextFunction) {
     res.status(401).json({ message: 'Invalid token' });
   }
 }
-
-export { jwtAuth };
 
