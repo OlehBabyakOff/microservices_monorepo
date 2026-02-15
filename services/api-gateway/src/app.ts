@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+
 import router from './routes/index.js';
 import configs from './configs/index.js';
 
