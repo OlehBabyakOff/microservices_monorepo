@@ -40,6 +40,10 @@ if (cluster.isPrimary) {
 
     console.log('Primary SIGTERM');
 
+    for (const id in cluster.workers) {
+      cluster.workers[id]?.kill('SIGTERM');
+    }
+
     cluster.disconnect(() => process.exit(0));
   });
 
@@ -48,6 +52,10 @@ if (cluster.isPrimary) {
     isShuttingDown = true;
 
     console.log('Primary SIGINT');
+
+    for (const id in cluster.workers) {
+      cluster.workers[id]?.kill('SIGINT');
+    }
 
     cluster.disconnect(() => process.exit(0));
   });
