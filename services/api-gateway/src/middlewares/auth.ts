@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 
 import { fromRoot } from '../utils/paths.js';
-import { verifyJWT } from '@common/utils/jwt.js';
+import { verifyJWT } from '../utils/jwt.js';
 
 const publicKeyPath = fromRoot('keys', 'public.pem');
 
