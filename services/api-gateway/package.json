@@ -2,12 +2,12 @@
   "name": "api-gateway",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/cluster.js",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/cluster.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/cluster.js",
+    "start": "node dist/index.js",
     "lint": "eslint src --ext .ts",
     "format": "prettier --write ."
   },

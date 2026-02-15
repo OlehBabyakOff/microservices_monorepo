@@ -4,6 +4,7 @@ const corsOrigin = process.env.CORS_ORIGIN;
 
 export default {
   NODE_ENV: process.env.NODE_ENV || 'development',
+  CLUSTER: process.env.CLUSTER === 'true' || false,
   PORT: process.env.PORT || 3000,
 
   CORS_ORIGIN: corsOrigin ? corsOrigin.split(',') : '*',
