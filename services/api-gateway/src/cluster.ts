@@ -1,17 +1,14 @@
 import cluster from 'cluster';
 import os from 'os';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-import configs from './configs/index.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { fromRoot } from './utils/paths.js';
+import configs from './configs/index.js';
 
 const cpuCount = os.availableParallelism();
 const isDev = configs.NODE_ENV !== 'production';
 
 if (cluster.isPrimary) {
-  const workerFile = isDev ? join(__dirname, 'server.ts') : join(__dirname, '../dist/server.js');
-  console.log(workerFile);
+  const workerFile = isDev ? fromRoot('server.ts') : fromRoot('../dist/server.js');
 
   cluster.setupPrimary({
     exec: workerFile,

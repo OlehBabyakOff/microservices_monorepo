@@ -1,11 +1,9 @@
 import type { Request, Response, NextFunction } from 'express';
 
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { fromRoot } from '../utils/paths';
 import { verifyJWT } from '@common/utils/jwt.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const publicKeyPath = join(__dirname, '../../keys/public.pem');
+const publicKeyPath = fromRoot('../../keys/public.pem');
 
 function jwtAuth(req: Request, res: Response, next: NextFunction) {
   const token = req.headers.authorization?.split(' ')[1];
