@@ -2,7 +2,7 @@ import app from './app.js';
 import configs from './configs/index.js';
 
 const server = app.listen(configs.PORT, () => {
-  console.log(`Worker ${process.pid} running on port ${configs.PORT}`);
+  console.log(`Worker ${process.pid} running on port ${configs.PORT} \n`);
 });
 
 process.on('SIGTERM', () => {

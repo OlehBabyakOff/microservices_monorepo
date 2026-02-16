@@ -15,7 +15,7 @@ if (cluster.isPrimary) {
     execArgv: process.execArgv,
   });
 
-  console.log(`Primary ${process.pid} is running`);
+  console.log(`Primary ${process.pid} is running\n`);
   console.log(`Forking ${cpuCount} workers\n`);
 
   for (let i = 0; i < cpuCount; i++) {
@@ -26,7 +26,7 @@ if (cluster.isPrimary) {
 
   cluster.on('exit', (worker, code, signal) => {
     console.log(
-      `Worker ${worker.process.pid} exited with code ${code} and signal ${signal}. Starting a new worker...`,
+      `Worker ${worker.process.pid} exited with code ${code} and signal ${signal}. Starting a new worker.\n`,
     );
 
     if (!isShuttingDown) {
