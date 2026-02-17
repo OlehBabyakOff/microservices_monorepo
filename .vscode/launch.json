@@ -22,7 +22,7 @@
             "name": "API Gateway (Prod Build)",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceFolder}/services/api-gateway/dist/index.js",
+            "program": "${workspaceFolder}/services/api-gateway/dist/main.js",
             "cwd": "${workspaceFolder}/services/api-gateway",
             "console": "integratedTerminal",
             "skipFiles": ["<node_internals>/**"],
