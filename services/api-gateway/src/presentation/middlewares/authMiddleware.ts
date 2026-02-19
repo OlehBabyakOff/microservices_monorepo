@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import { AuthMiddleware as IAuthMiddleware } from '../interfaces/AuthMiddleware';
+import { IAuthMiddleware } from '../interfaces/AuthMiddleware';
 
 import { VerifyJWT } from '../../application/use-cases/VerifyJwt';
 

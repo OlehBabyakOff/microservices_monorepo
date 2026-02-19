@@ -1,8 +1,8 @@
-import { TokenVerifier } from '../../domain/interfaces/TokenVerifier';
+import { ITokenVerifier } from '../../domain/interfaces/TokenVerifier';
 import { ApplicationError } from '../errors/ApplicationError';
 
 export class VerifyJWT {
-  constructor(private readonly tokenVerifier: TokenVerifier) {}
+  constructor(private readonly tokenVerifier: ITokenVerifier) {}
 
   execute(token: string) {
     if (!token) {

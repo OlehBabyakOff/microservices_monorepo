@@ -1,13 +1,13 @@
 import express, { Router } from 'express';
 
-import { AuthMiddleware } from '../interfaces/AuthMiddleware';
-import { ServiceProxy } from '../interfaces/ServiceProxy';
+import { IAuthMiddleware } from '../interfaces/AuthMiddleware';
+import { IServiceProxy } from '../interfaces/ServiceProxy';
 
 export class GatewayRouter {
   constructor(
-    private readonly authMiddleware: AuthMiddleware,
-    private readonly authProxy: ServiceProxy,
-    private readonly userProxy: ServiceProxy,
+    private readonly authMiddleware: IAuthMiddleware,
+    private readonly authProxy: IServiceProxy,
+    private readonly userProxy: IServiceProxy,
   ) {}
 
   create(): Router {

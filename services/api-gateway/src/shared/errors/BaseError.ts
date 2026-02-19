@@ -1,7 +1,4 @@
-export interface IErrorPayload {
-  message?: string;
-  contextFn?: Function;
-}
+import { IErrorPayload } from '../interfaces/ErrorPayload';
 
 export class BaseError extends Error {
   public readonly statusCode: number;

@@ -1,4 +1,4 @@
-export interface TokenVerifier {
+export interface ITokenVerifier {
   verify(token: string): string | object;
 }
 

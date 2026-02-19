@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 
-export interface ServiceProxy {
+export interface IServiceProxy {
   getHandler(): RequestHandler;
 }
 

@@ -1,9 +1,9 @@
 import { createProxyMiddleware, Options } from 'http-proxy-middleware';
 
-import { ServiceProxy } from '../../presentation/interfaces/ServiceProxy';
+import { IServiceProxy } from '../../presentation/interfaces/ServiceProxy';
 import { RequestHandler } from 'express';
 
-export class HttpServiceProxy implements ServiceProxy {
+export class HttpServiceProxy implements IServiceProxy {
   private handler: RequestHandler;
 
   constructor(

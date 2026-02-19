@@ -1,4 +1,4 @@
-export interface KeyProvider {
+export interface IKeyProvider {
   getPublicKey(): Buffer;
 }
 
