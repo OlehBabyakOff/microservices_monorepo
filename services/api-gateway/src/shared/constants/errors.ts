@@ -13,7 +13,7 @@ export const APPLICATION_ERRORS = {
 
 export const INFRASTRUCTURE_ERRORS = {
   SERVICE_UNAVAILABLE: {
-    message: 'Service Unavailable',
+    message: 'Service is unavailable',
     status: 'SERVICE_UNAVAILABLE',
     statusCode: 503,
   },
