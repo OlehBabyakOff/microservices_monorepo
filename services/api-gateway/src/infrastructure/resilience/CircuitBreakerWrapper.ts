@@ -12,7 +12,7 @@ export function createCircuitBreaker<T extends (...args: any[]) => Promise<any>>
     timeout: 5000,
     errorThresholdPercentage: 50,
     resetTimeout: 30000,
-    name: `CircuitBreaker for ${target}`,
+    name: `Circuit breaker for ${target}`,
     ...options,
   });
 
