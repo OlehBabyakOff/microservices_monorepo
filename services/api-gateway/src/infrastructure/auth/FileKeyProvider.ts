@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { fromRoot } from '../configs/paths';
+import { fromRoot } from '../utils/paths';
 import { IKeyProvider } from '../../application/interfaces/KeyProvider';
 
 export class FileKeyProvider implements IKeyProvider {
