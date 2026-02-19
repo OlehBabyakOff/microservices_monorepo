@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 import { ILogger } from 'services/api-gateway/src/infrastructure/interfaces/Logger';
 

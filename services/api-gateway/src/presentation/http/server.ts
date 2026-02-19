@@ -1,4 +1,4 @@
-import type { Express } from 'express';
+import { Express } from 'express';
 
 import { ILogger } from '../../infrastructure/interfaces/Logger.js';
 

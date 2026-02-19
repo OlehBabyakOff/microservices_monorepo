@@ -9,7 +9,7 @@ export class InfrastructureError extends BaseError {
     super(statusCode, status, payload);
   }
 
-  static SERVICE_UNAVAILABLE(serviceName: string = ENV.SERVICE_NAME) {
+  static SERVICE_UNAVAILABLE(serviceName?: string) {
     return new this(
       INFRASTRUCTURE_ERRORS.SERVICE_UNAVAILABLE.statusCode,
       INFRASTRUCTURE_ERRORS.SERVICE_UNAVAILABLE.status,

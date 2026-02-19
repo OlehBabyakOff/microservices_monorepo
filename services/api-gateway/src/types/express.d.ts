@@ -1,5 +1,5 @@
 import 'express';
-import type { JwtPayload } from 'jsonwebtoken';
+import { JwtPayload } from 'jsonwebtoken';
 
 declare module 'express' {
   interface Request {

@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 export interface IAuthMiddleware {
   handle(req: Request, res: Response, next: NextFunction): void;

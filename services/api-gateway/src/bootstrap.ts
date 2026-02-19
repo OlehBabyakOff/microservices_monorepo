@@ -25,8 +25,8 @@ export function bootstrap() {
   const authMiddleware = new AuthMiddleware(verifyJwt);
 
   // Proxies
-  const authProxy = new HttpServiceProxy(ENV.SERVICES.AUTH);
-  const userProxy = new HttpServiceProxy(ENV.SERVICES.USER);
+  const authProxy = new HttpServiceProxy(ENV.SERVICES.AUTH, logger);
+  const userProxy = new HttpServiceProxy(ENV.SERVICES.USER, logger);
 
   const router = new GatewayRouter(authMiddleware, authProxy, userProxy).create();
 

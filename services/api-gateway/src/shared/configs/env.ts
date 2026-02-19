@@ -41,6 +41,7 @@ export const ENV = {
   CORS_ORIGIN: parseCors(process.env.CORS_ORIGIN),
 
   SERVICES: {
+    API_GATEWAY: process.env.API_GATEWAY_URL || 'http://localhost:3000',
     AUTH: process.env.AUTH_SERVICE_URL || 'http://localhost:3001',
     USER: process.env.USER_SERVICE_URL || 'http://localhost:3002',
   },
