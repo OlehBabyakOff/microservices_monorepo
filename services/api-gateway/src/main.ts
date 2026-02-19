@@ -2,7 +2,7 @@ import cluster from 'cluster';
 import os from 'os';
 
 import { bootstrap } from './bootstrap.js';
-import { PinoLogger } from './infrastructure/logger/Pino.js';
+import { PinoLogger } from './infrastructure/logger/pino/Pino.js';
 
 import { ENV } from './shared/configs/env.js';
 

@@ -1,7 +1,7 @@
+import { IErrorPayload } from '../../shared/interfaces/ErrorPayload';
+
 import { BaseError } from '../../shared/errors/BaseError';
 import { APPLICATION_ERRORS } from '../../shared/constants/errors';
-
-import { IErrorPayload } from '../../shared/interfaces/ErrorPayload';
 
 export class ApplicationError extends BaseError {
   constructor(statusCode: number, status: string, payload: IErrorPayload = {}) {

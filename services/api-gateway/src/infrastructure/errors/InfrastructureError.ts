@@ -1,8 +1,8 @@
-import { BaseError } from '../../shared/errors/BaseError';
-import { ENV } from '../../shared/configs/env';
-import { INFRASTRUCTURE_ERRORS } from '../../shared/constants/errors';
-
 import { IErrorPayload } from '../../shared/interfaces/ErrorPayload';
+
+import { ENV } from '../../shared/configs/env';
+import { BaseError } from '../../shared/errors/BaseError';
+import { INFRASTRUCTURE_ERRORS } from '../../shared/constants/errors';
 
 export class InfrastructureError extends BaseError {
   constructor(statusCode: number, status: string, payload: IErrorPayload = {}) {

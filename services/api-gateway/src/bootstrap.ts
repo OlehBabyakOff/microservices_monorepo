@@ -1,7 +1,7 @@
 import { FileKeyProvider } from './infrastructure/auth/FileKeyProvider.js';
-import { JwtVerifier } from './infrastructure/auth/JwtVerifier.js';
+import { JwtVerifier } from './infrastructure/auth/jwt/JwtVerifier.js';
 import { HttpServiceProxy } from './infrastructure/proxy/HttpProxyAdapter.js';
-import { PinoLogger } from './infrastructure/logger/Pino.js';
+import { PinoLogger } from './infrastructure/logger/pino/Pino.js';
 import { AuthMiddleware } from './presentation/http/middlewares/authMiddleware.js';
 import { GatewayRouter } from './presentation/http/routes/gatewayRoutes.js';
 import { createApp } from './presentation/http/app.js';

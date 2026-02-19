@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
+
 import { IAuthMiddleware } from '../../http/interfaces/AuthMiddleware';
 
 import { VerifyJWT } from '../../../application/use-cases/VerifyJwt';

@@ -1,4 +1,5 @@
 import { ITokenVerifier } from '../../domain/interfaces/TokenVerifier';
+
 import { ApplicationError } from '../errors/ApplicationError';
 
 export class VerifyJWT {

@@ -1,7 +1,7 @@
 import os from 'os';
 import pino from 'pino';
 
-import { ENV } from '../../shared/configs/env';
+import { ENV } from '../../../shared/configs/env';
 
 const isDev = ENV.NODE_ENV === ENV.ENVIRONMENTS.DEVELOPMENT;
 

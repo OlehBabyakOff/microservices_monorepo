@@ -1,7 +1,8 @@
 import type { Express } from 'express';
-import { ENV } from '../../shared/configs/env.js';
 
 import { ILogger } from '../../infrastructure/interfaces/Logger.js';
+
+import { ENV } from '../../shared/configs/env.js';
 
 export function startServer(app: Express, logger: ILogger) {
   const server = app.listen(ENV.PORT, () => {

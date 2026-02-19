@@ -4,11 +4,12 @@ import compression from 'compression';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import { errorHandler } from './middlewares/errorMiddleware';
-import { requestLogger } from './middlewares/reqLoggerMiddleware.js';
+import { ILogger } from '../../infrastructure/interfaces/Logger.js';
+
 import { ENV } from '../../shared/configs/env.js';
 
-import { ILogger } from '../../infrastructure/interfaces/Logger.js';
+import { errorHandler } from './middlewares/errorMiddleware';
+import { requestLogger } from './middlewares/reqLoggerMiddleware.js';
 
 export function createApp(router: Router, logger: ILogger): Express {
   const app = express();
@@ -35,7 +36,7 @@ export function createApp(router: Router, logger: ILogger): Express {
 
   app.use('/api', router);
 
-  app.use(errorHandler);
+  app.use(errorHandler(logger));
 
   return app;
 }

@@ -1,6 +1,8 @@
 import fs from 'fs';
-import { fromRoot } from '../utils/paths';
+
 import { IKeyProvider } from '../../application/interfaces/KeyProvider';
+
+import { fromRoot } from '../../shared/utils/paths';
 
 export class FileKeyProvider implements IKeyProvider {
   private readonly publicKeyPath = fromRoot('keys', 'public.pem');
