@@ -34,6 +34,10 @@ export function createApp(router: Router, logger: ILogger): Express {
     app.use(requestLogger(logger));
   }
 
+  app.get('/health', (_, res: Response) =>
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() }),
+  );
+
   app.use('/api', router);
 
   app.use(errorHandler(logger));
