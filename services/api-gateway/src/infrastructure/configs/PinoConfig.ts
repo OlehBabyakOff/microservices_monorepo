@@ -21,6 +21,7 @@ export const PinoConfig = {
           colorize: true,
           levelFirst: true,
           translateTime: 'yyyy-mm-dd HH:MM:ss o',
+          ignore: 'pid,hostname,env,service',
         },
       }
     : undefined, // no transport in prod, write logs to stdout
