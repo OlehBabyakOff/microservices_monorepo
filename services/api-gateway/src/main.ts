@@ -2,13 +2,16 @@ import cluster from 'cluster';
 import os from 'os';
 
 import { bootstrap } from './bootstrap.js';
+import { PinoLogger } from './infrastructure/logger/Pino.js';
+
 import { ENV } from './shared/configs/env.js';
 
 const cpuCount = os.availableParallelism();
+const logger = new PinoLogger();
 
 if (ENV.CLUSTER && cluster.isPrimary) {
-  console.log(`Primary ${process.pid} is running\n`);
-  console.log(`Forking ${cpuCount} workers\n`);
+  logger.info(`Primary ${process.pid} is running\n`);
+  logger.info(`Forking ${cpuCount} workers\n`);
 
   for (let i = 0; i < cpuCount; i++) {
     cluster.fork();
@@ -17,7 +20,7 @@ if (ENV.CLUSTER && cluster.isPrimary) {
   let isShuttingDown = false;
 
   cluster.on('exit', (worker, code, signal) => {
-    console.log(
+    logger.info(
       `Worker ${worker.process.pid} exited with code ${code} and signal ${signal}. Starting a new worker.\n`,
     );
 
@@ -33,7 +36,7 @@ if (ENV.CLUSTER && cluster.isPrimary) {
 
     isShuttingDown = true;
 
-    console.log(`Primary ${signal}`);
+    logger.info(`Primary ${signal}`);
 
     for (const id in cluster.workers) {
       cluster.workers[id]?.kill(`${signal}`);

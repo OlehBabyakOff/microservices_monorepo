@@ -26,8 +26,15 @@ function parseCors(origin?: string): string[] | '*' {
   return origin.split(',').map((o) => o.trim());
 }
 
+const ENVIRONMENTS = {
+  DEVELOPMENT: 'development',
+  PRODUCTION: 'production',
+};
+
 export const ENV = {
-  NODE_ENV: process.env.NODE_ENV ?? 'development',
+  ENVIRONMENTS,
+  NODE_ENV: process.env.NODE_ENV ?? ENVIRONMENTS.DEVELOPMENT,
+  SERVICE_NAME: process.env.SERVICE_NAME || 'API GATEWAY',
   PORT: parseNumber(process.env.PORT, 3000),
   CLUSTER: parseBoolean(process.env.CLUSTER),
 
@@ -36,6 +43,15 @@ export const ENV = {
   SERVICES: {
     AUTH: process.env.AUTH_SERVICE_URL || 'http://localhost:3001',
     USER: process.env.USER_SERVICE_URL || 'http://localhost:3002',
+  },
+
+  LOG_LEVELS: {
+    TRACE: 'trace',
+    DEBUG: 'debug',
+    INFO: 'info',
+    WARN: 'warn',
+    ERROR: 'error',
+    FATAL: 'fatal',
   },
 };
 

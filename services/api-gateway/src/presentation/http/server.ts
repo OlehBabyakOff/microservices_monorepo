@@ -1,13 +1,15 @@
 import type { Express } from 'express';
 import { ENV } from '../../shared/configs/env.js';
 
-export function startServer(app: Express) {
+import { ILogger } from '../../infrastructure/interfaces/Logger.js';
+
+export function startServer(app: Express, logger: ILogger) {
   const server = app.listen(ENV.PORT, () => {
-    console.log(`Worker ${process.pid} running on port ${ENV.PORT} \n`);
+    logger.info(`Worker ${process.pid} running on port ${ENV.PORT} \n`);
   });
 
   const shutdown = (signal: 'SIGTERM' | 'SIGINT') => {
-    console.log(`Worker ${process.pid} ${signal}`);
+    logger.info(`Worker ${process.pid} ${signal}`);
 
     server.close(() => process.exit(0));
   };

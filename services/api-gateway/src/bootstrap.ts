@@ -1,6 +1,7 @@
 import { FileKeyProvider } from './infrastructure/auth/FileKeyProvider.js';
 import { JwtVerifier } from './infrastructure/auth/JwtVerifier.js';
 import { HttpServiceProxy } from './infrastructure/proxy/HttpProxyAdapter.js';
+import { PinoLogger } from './infrastructure/logger/Pino.js';
 import { AuthMiddleware } from './presentation/middlewares/authMiddleware.js';
 import { GatewayRouter } from './presentation/routes/gatewayRoutes.js';
 import { createApp } from './presentation/http/app.js';
@@ -14,6 +15,7 @@ export function bootstrap() {
   const keyProvider = new FileKeyProvider();
 
   // Infrastructure
+  const logger = new PinoLogger();
   const jwtVerifier = new JwtVerifier(keyProvider.getPublicKey());
 
   // Use-cases
@@ -28,20 +30,20 @@ export function bootstrap() {
 
   const router = new GatewayRouter(authMiddleware, authProxy, userProxy).create();
 
-  const app = createApp(router);
+  const app = createApp(router, logger);
 
   process.on('uncaughtException', (err) => {
-    console.error('Uncaught Exception:', err);
+    logger.fatal('Uncaught Exception', err as Error);
 
     process.exit(1);
   });
 
   process.on('unhandledRejection', (err) => {
-    console.error('Unhandled Rejection:', err);
+    logger.fatal('Unhandled Rejection', err as Error);
 
     process.exit(1);
   });
 
-  startServer(app);
+  startServer(app, logger);
 }
 
