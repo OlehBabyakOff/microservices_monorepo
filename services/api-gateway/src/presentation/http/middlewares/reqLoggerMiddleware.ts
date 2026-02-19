@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ILogger } from '../../infrastructure/interfaces/Logger';
+import { ILogger } from '../../../infrastructure/interfaces/Logger';
 
 import chalk from 'chalk';
 

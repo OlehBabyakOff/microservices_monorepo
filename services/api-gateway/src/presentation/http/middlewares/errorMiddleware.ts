@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 
-import { BaseError } from '../../shared/errors/BaseError';
-import { INTERNAL_ERRORS } from '../../shared/constants/errors';
+import { BaseError } from '../../../shared/errors/BaseError';
+import { INTERNAL_ERRORS } from '../../../shared/constants/errors';
 
 export function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   if (err instanceof BaseError) {

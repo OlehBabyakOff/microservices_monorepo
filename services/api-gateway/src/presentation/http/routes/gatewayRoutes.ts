@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 
-import { IAuthMiddleware } from '../interfaces/AuthMiddleware';
-import { IServiceProxy } from '../interfaces/ServiceProxy';
+import { IAuthMiddleware } from '../../http/interfaces/AuthMiddleware';
+import { IServiceProxy } from '../../http/interfaces/ServiceProxy';
 
 export class GatewayRouter {
   constructor(

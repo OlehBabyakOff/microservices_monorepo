@@ -4,8 +4,8 @@ import compression from 'compression';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import { errorHandler } from '../middlewares/errorMiddleware.js';
-import { requestLogger } from '../middlewares/reqLoggerMiddleware.js';
+import { errorHandler } from './middlewares/errorMiddleware';
+import { requestLogger } from './middlewares/reqLoggerMiddleware.js';
 import { ENV } from '../../shared/configs/env.js';
 
 import { ILogger } from '../../infrastructure/interfaces/Logger.js';
