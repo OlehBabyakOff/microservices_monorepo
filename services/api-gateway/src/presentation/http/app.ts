@@ -4,6 +4,7 @@ import compression from 'compression';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
+import { errorHandler } from '../middlewares/errorMiddleware.js';
 import { ENV } from '../../shared/configs/env.js';
 
 export function createApp(router: Router): Express {
@@ -26,6 +27,8 @@ export function createApp(router: Router): Express {
   app.use(compression());
 
   app.use('/api', router);
+
+  app.use(errorHandler);
 
   return app;
 }

@@ -1,14 +1,19 @@
 import { TokenVerifier } from '../../domain/interfaces/TokenVerifier';
+import { ApplicationError } from '../errors/ApplicationError';
 
 export class VerifyJWT {
   constructor(private readonly tokenVerifier: TokenVerifier) {}
 
   execute(token: string) {
     if (!token) {
-      throw new Error('Token is required!');
+      throw ApplicationError.MISSING_TOKEN('No token provided');
     }
 
-    return this.tokenVerifier.verify(token);
+    try {
+      return this.tokenVerifier.verify(token);
+    } catch (error) {
+      throw ApplicationError.INVALID_TOKEN('Invalid token');
+    }
   }
 }
 
