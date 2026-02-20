@@ -3,12 +3,10 @@ version: '3.9'
 services:
   redis:
     image: redis:7-alpine
-    container_name: redis-dev
-    ports:
-      - '6379:6379'
+    container_name: redis
     healthcheck:
       test: ['CMD', 'redis-cli', 'ping']
-      interval: 5s
+      interval: 10s
       timeout: 3s
       retries: 5
     restart: unless-stopped
@@ -17,15 +15,10 @@ services:
     build:
       context: .
       dockerfile: services/api-gateway/Dockerfile
-      target: dev
-    container_name: api-gateway-dev
-    volumes:
-      - ./services/api-gateway/src:/app/services/api-gateway/src
-      - ./services/api-gateway/tsconfig.json:/app/services/api-gateway/tsconfig.json
-      - ./services/api-gateway/.env:/app/services/api-gateway/.env
+      target: prod
+    container_name: api-gateway
     ports:
       - '3000:3000'
-      - '9229:9229'
     env_file:
       - services/api-gateway/.env
     depends_on:
