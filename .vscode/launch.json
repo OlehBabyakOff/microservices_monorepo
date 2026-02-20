@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "API Gateway Docker",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "address": "localhost",
+            "restart": true,
+            "localRoot": "${workspaceFolder}/services/api-gateway",
+            "remoteRoot": "/app/services/api-gateway",
+            "skipFiles": ["<node_internals>/**"]
+        },
+        {
             "name": "API Gateway (Dev - tsx)",
             "type": "node",
             "request": "launch",
