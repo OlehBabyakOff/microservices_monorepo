@@ -46,6 +46,18 @@ export const ENV = {
     USER: process.env.USER_SERVICE_URL || 'http://localhost:3002',
   },
 
+  REDIS: {
+    HOST: process.env.REDIS_HOST || 'localhost',
+    PORT: parseNumber(process.env.REDIS_PORT, 6379),
+    USER: process.env.REDIS_USER || '',
+    PASSWORD: process.env.REDIS_PASSWORD || '',
+    KEY_PREFIX: process.env.REDIS_KEY_PREFIX || 'api-gateway:',
+    MAX_RETRIES_PER_REQUEST: parseNumber(process.env.REDIS_MAX_RETRIES_PER_REQUEST, 2),
+    ENABLE_OFFLINE_QUEUE: parseBoolean(process.env.REDIS_ENABLE_OFFLINE_QUEUE),
+    CONNECT_TIMEOUT: parseNumber(process.env.REDIS_CONNECT_TIMEOUT, 5000),
+    COMMAND_TIMEOUT: parseNumber(process.env.REDIS_COMMAND_TIMEOUT, 3000),
+  },
+
   LOG_LEVELS: {
     TRACE: 'trace',
     DEBUG: 'debug',

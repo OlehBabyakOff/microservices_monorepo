@@ -17,6 +17,11 @@ export const INFRASTRUCTURE_ERRORS = {
     status: 'SERVICE_UNAVAILABLE',
     statusCode: 503,
   },
+  RATE_LIMIT_ERROR: {
+    message: 'Rate limit error occurred',
+    status: 'RATE_LIMIT_ERROR',
+    statusCode: 500,
+  },
 };
 
 export const INTERNAL_ERRORS = {

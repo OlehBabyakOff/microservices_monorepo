@@ -1,7 +1,9 @@
+import { RedisClient } from './infrastructure/db/Redis.js';
 import { FileKeyProvider } from './infrastructure/auth/FileKeyProvider.js';
 import { JwtVerifier } from './infrastructure/auth/jwt/JwtVerifier.js';
 import { HttpServiceProxy } from './infrastructure/proxy/HttpProxyAdapter.js';
 import { PinoLogger } from './infrastructure/logger/pino/Pino.js';
+import { SlidingWindowRateLimit } from './infrastructure/resilience/SlidingWindowRateLimit.js';
 import { AuthMiddleware } from './presentation/http/middlewares/authMiddleware.js';
 import { GatewayRouter } from './presentation/http/routes/gatewayRoutes.js';
 import { createApp } from './presentation/http/app.js';
@@ -10,40 +12,53 @@ import { VerifyJWT } from './application/use-cases/VerifyJwt.js';
 
 import { ENV } from './shared/configs/env.js';
 
-export function bootstrap() {
-  // Provider
-  const keyProvider = new FileKeyProvider();
-
-  // Infrastructure
+export async function bootstrap(): Promise<void> {
   const logger = new PinoLogger();
-  const jwtVerifier = new JwtVerifier(keyProvider.getPublicKey());
 
-  // Use-cases
-  const verifyJwt = new VerifyJWT(jwtVerifier);
+  try {
+    // Provider
+    const keyProvider = new FileKeyProvider();
 
-  // Middlewares
-  const authMiddleware = new AuthMiddleware(verifyJwt);
+    // Infrastructure
+    const redisClient = new RedisClient(logger);
+    redisClient.connect();
 
-  // Proxies
-  const authProxy = new HttpServiceProxy(ENV.SERVICES.AUTH, logger);
-  const userProxy = new HttpServiceProxy(ENV.SERVICES.USER, logger);
+    const redis = redisClient.getClient();
 
-  const router = new GatewayRouter(authMiddleware, authProxy, userProxy).create();
+    const jwtVerifier = new JwtVerifier(keyProvider.getPublicKey());
+    const limiter = new SlidingWindowRateLimit(redis);
 
-  const app = createApp(router, logger);
+    // Use-cases
+    const verifyJwt = new VerifyJWT(jwtVerifier);
 
-  process.on('uncaughtException', (err) => {
-    logger.fatal('Uncaught Exception', err as Error);
+    // Middlewares
+    const authMiddleware = new AuthMiddleware(verifyJwt);
+
+    // Proxies
+    const authProxy = new HttpServiceProxy(ENV.SERVICES.AUTH, logger);
+    const userProxy = new HttpServiceProxy(ENV.SERVICES.USER, logger);
+
+    const router = new GatewayRouter(authMiddleware, authProxy, userProxy).create();
+
+    const app = createApp(router, limiter, logger);
+
+    process.on('uncaughtException', (err) => {
+      logger.fatal('Uncaught Exception', err as Error);
+
+      process.exit(1);
+    });
+
+    process.on('unhandledRejection', (err) => {
+      logger.fatal('Unhandled Rejection', err as Error);
+
+      process.exit(1);
+    });
+
+    startServer(app, redis, logger);
+  } catch (error) {
+    logger.fatal('Bootstrap error', error as Error);
 
     process.exit(1);
-  });
-
-  process.on('unhandledRejection', (err) => {
-    logger.fatal('Unhandled Rejection', err as Error);
-
-    process.exit(1);
-  });
-
-  startServer(app, logger);
+  }
 }
 

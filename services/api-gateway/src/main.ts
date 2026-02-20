@@ -7,40 +7,37 @@ import { PinoLogger } from './infrastructure/logger/pino/Pino.js';
 import { ENV } from './shared/configs/env.js';
 
 const cpuCount = os.availableParallelism();
+
 const logger = new PinoLogger();
 
+async function startWorker(): Promise<void> {
+  try {
+    await bootstrap();
+  } catch (error) {
+    logger.fatal('Worker bootstrap error', error as Error);
+
+    process.exit(1);
+  }
+}
+
 if (ENV.CLUSTER && cluster.isPrimary) {
-  logger.info(`Primary ${process.pid} is running\n`);
-  logger.info(`Forking ${cpuCount} workers\n`);
+  logger.info(`Primary ${process.pid} is running`);
+  logger.info(`Forking ${cpuCount} workers`);
 
   for (let i = 0; i < cpuCount; i++) {
     cluster.fork();
   }
 
-  let isShuttingDown = false;
-
   cluster.on('exit', (worker, code, signal) => {
     logger.info(
-      `Worker ${worker.process.pid} exited with code ${code} and signal ${signal}. Starting a new worker.\n`,
+      `Worker ${worker.process.pid} exited with code ${code} and signal ${signal}. Starting a new worker.`,
     );
 
-    if (!isShuttingDown) {
-      cluster.fork();
-    }
+    cluster.fork();
   });
 
   const shutdown = (signal: 'SIGTERM' | 'SIGINT') => {
-    if (isShuttingDown) {
-      return;
-    }
-
-    isShuttingDown = true;
-
     logger.info(`Primary ${signal}`);
-
-    for (const id in cluster.workers) {
-      cluster.workers[id]?.kill(`${signal}`);
-    }
 
     cluster.disconnect(() => process.exit(0));
   };
@@ -49,6 +46,6 @@ if (ENV.CLUSTER && cluster.isPrimary) {
 
   process.on('SIGINT', () => shutdown('SIGINT'));
 } else {
-  bootstrap();
+  startWorker();
 }
 

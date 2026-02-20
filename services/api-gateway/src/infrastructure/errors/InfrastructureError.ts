@@ -19,5 +19,16 @@ export class InfrastructureError extends BaseError {
       },
     );
   }
+
+  static RATE_LIMIT_ERROR(errorMessage?: string) {
+    return new this(
+      INFRASTRUCTURE_ERRORS.RATE_LIMIT_ERROR.statusCode,
+      INFRASTRUCTURE_ERRORS.RATE_LIMIT_ERROR.status,
+      {
+        message: errorMessage || 'Rate limit error occurred',
+        contextFn: this.RATE_LIMIT_ERROR,
+      },
+    );
+  }
 }
 
