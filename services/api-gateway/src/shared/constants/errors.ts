@@ -24,6 +24,14 @@ export const INFRASTRUCTURE_ERRORS = {
   },
 };
 
+export const HTTP_ERRORS = {
+  UNAUTHORIZED: {
+    message: 'Unauthorized',
+    status: 'UNAUTHORIZED',
+    statusCode: 401,
+  },
+};
+
 export const INTERNAL_ERRORS = {
   INTERNAL_SERVER_ERROR: {
     message: 'Internal Server Error',
