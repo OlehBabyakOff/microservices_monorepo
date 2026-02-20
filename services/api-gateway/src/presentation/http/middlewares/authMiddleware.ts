@@ -2,12 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 
 import { IAuthMiddleware } from '../../http/interfaces/AuthMiddleware';
 
-import { VerifyJWT } from '../../../application/use-cases/VerifyJwt';
+import { VerifyToken } from '../../../application/use-cases/VerifyToken';
 
 import { HttpError } from '../errors/HttpErrors';
 
 export class AuthMiddleware implements IAuthMiddleware {
-  constructor(private readonly verifyJWT: VerifyJWT) {}
+  constructor(private readonly verifyToken: VerifyToken) {}
 
   handle = (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -23,7 +23,7 @@ export class AuthMiddleware implements IAuthMiddleware {
 
       const token = authHeader.split(' ')[1];
 
-      const payload = this.verifyJWT.execute(token);
+      const payload = this.verifyToken.execute(token);
 
       req.user = payload;
 
