@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "API Gateway (Dev - tsx)",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "pnpm",
+            "runtimeArgs": ["dev"],
+            "cwd": "${workspaceFolder}/services/api-gateway",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": ["<node_internals>/**"],
+            "env": {
+                "NODE_ENV": "development"
+            }
+        },
+        {
+            "name": "API Gateway (Prod Build)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/services/api-gateway/dist/main.js",
+            "cwd": "${workspaceFolder}/services/api-gateway",
+            "console": "integratedTerminal",
+            "skipFiles": ["<node_internals>/**"],
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    ]
+}
