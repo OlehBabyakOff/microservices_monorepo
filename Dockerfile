@@ -65,4 +65,5 @@ EXPOSE 3000
 # debug port
 EXPOSE 9229
 
-CMD ["node", "--inspect=0.0.0.0:9229", "-r", "tsx", "src/main.ts"]
+# run binaries from root
+CMD ["pnpm", "dlx", "tsx", "watch", "src/main.ts", "--inspect=0.0.0.0:9229"]

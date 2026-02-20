@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: redis-dev
+    ports:
+      - '6379:6379'
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        SERVICE: api-gateway
+    container_name: api-gateway-dev
+    volumes:
+      - ./services/api-gateway:/app/services/api-gateway
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+    ports:
+      - '3000:3000'
+      - '9229:9229'
+    env_file:
+      - services/api-gateway/.env
+    depends_on:
+      - redis
+
