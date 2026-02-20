@@ -8,7 +8,7 @@ import { AuthMiddleware } from './presentation/http/middlewares/authMiddleware.j
 import { GatewayRouter } from './presentation/http/routes/gatewayRoutes.js';
 import { createApp } from './presentation/http/app.js';
 import { startServer } from './presentation/http/server.js';
-import { VerifyJWT } from './application/use-cases/VerifyJwt.js';
+import { VerifyToken } from './application/use-cases/VerifyToken.js';
 
 import { ENV } from './shared/configs/env.js';
 
@@ -29,10 +29,10 @@ export async function bootstrap(): Promise<void> {
     const limiter = new SlidingWindowRateLimit(redis);
 
     // Use-cases
-    const verifyJwt = new VerifyJWT(jwtVerifier);
+    const verifyToken = new VerifyToken(jwtVerifier);
 
     // Middlewares
-    const authMiddleware = new AuthMiddleware(verifyJwt);
+    const authMiddleware = new AuthMiddleware(verifyToken);
 
     // Proxies
     const authProxy = new HttpServiceProxy(ENV.SERVICES.AUTH, logger);
