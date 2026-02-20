@@ -80,7 +80,7 @@ export class SlidingWindowRateLimit implements ISlidingWindowRateLimit {
     const requestId = `${now}-${Math.random().toString(36).slice(2, 10)}`;
 
     try {
-      const result: [number, number, number] = await this.redisClient.slidingWindow(
+      const result: [number, number, number] = await (this.redisClient as any).slidingWindow(
         keyName,
         this.windowMs,
         this.maxRequests,
