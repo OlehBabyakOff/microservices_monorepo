@@ -6,7 +6,7 @@ WORKDIR /app
 
 RUN corepack enable
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml* ./
+COPY ../../package.json ../../pnpm-lock.yaml ../../pnpm-workspace.yaml* ./
 
 RUN pnpm install --frozen-lockfile
 
@@ -14,8 +14,8 @@ RUN pnpm install --frozen-lockfile
 # Stage: Build
 FROM base AS build
 
-COPY services/api-gateway/tsconfig.json ./services/api-gateway/tsconfig.json
-COPY services/api-gateway/src ./services/api-gateway/src
+COPY ./tsconfig.json ./tsconfig.json
+COPY ./src ./src
 
 WORKDIR /app/services/api-gateway
 
@@ -33,12 +33,11 @@ RUN apk add --no-cache curl \
     && addgroup -S nodejs \
     && adduser -S nodejs -G nodejs
 
-COPY services/api-gateway/package.json ./services/api-gateway/package.json
+COPY ./package.json ./package.json
 
 COPY --from=base /app/node_modules ./node_modules
 COPY --from=build /app/services/api-gateway/dist ./dist
 
-# remove dev dependencies
 RUN pnpm prune --prod
 
 EXPOSE 3000
@@ -61,6 +60,7 @@ COPY services/api-gateway/. ./
 RUN pnpm install
 
 EXPOSE 3000
+
 # Debugging port
 EXPOSE 9229
 
