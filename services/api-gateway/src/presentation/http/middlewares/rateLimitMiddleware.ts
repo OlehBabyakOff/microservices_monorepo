@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { Request, Response, NextFunction } from 'express';
 
 import { ILogger } from '../../../infrastructure/interfaces/Logger';
@@ -5,13 +6,13 @@ import { ISlidingWindowRateLimit } from '../../../infrastructure/interfaces/Slid
 
 export function rateLimit(limiter: ISlidingWindowRateLimit, logger: ILogger) {
   const keyGenerator = (req: Request): string => {
-    const forwarded = req.headers['x-forwarded-for'];
+    const ip = req.headers['x-forwarded-for']?.toString().split(',')[0].trim() || req.ip;
 
-    if (typeof forwarded === 'string') {
-      return forwarded.split(',')[0].trim();
-    }
+    const userAgent = req.headers['user-agent'];
 
-    return req.ip as string;
+    const rawKey = `${userAgent}-${ip}`;
+
+    return crypto.createHash('sha256').update(rawKey).digest('hex');
   };
 
   return async (req: Request, res: Response, next: NextFunction) => {
