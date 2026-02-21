@@ -19,11 +19,14 @@ services:
       context: .
       dockerfile: services/api-gateway/Dockerfile
       target: dev
+      labels:
+        - 'env:dev'
+    image: api-gateway:dev
     volumes:
       - .:/app
       - /app/node_modules
     ports:
-      - '3000:3000'
+      - '3001:3001'
       - '9229:9229'
     env_file:
       - services/api-gateway/.env

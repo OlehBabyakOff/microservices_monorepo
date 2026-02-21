@@ -17,6 +17,9 @@ services:
       context: .
       dockerfile: services/api-gateway/Dockerfile
       target: prod
+      labels:
+        - 'env:prod'
+    image: api-gateway:prod
     volumes:
       - ./services/api-gateway/keys:/app/services/api-gateway/keys:ro
     ports:

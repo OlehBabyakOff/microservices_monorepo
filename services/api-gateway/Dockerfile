@@ -53,9 +53,11 @@ WORKDIR /app
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 3001
 
-# Debugging port
+# debugging port
 EXPOSE 9229
 
-CMD ["pnpm", "--filter", "api-gateway", "dev"]
+WORKDIR /app/services/api-gateway
+
+CMD ["npx", "tsx", "watch", "src/main.ts", "--inspect=0.0.0.0:9229"]
