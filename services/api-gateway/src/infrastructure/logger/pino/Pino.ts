@@ -1,8 +1,8 @@
 import pino, { Logger, LoggerOptions } from 'pino';
 
-import { ILogger } from '../../interfaces/Logger';
+import { ILogger } from '../../interfaces/Logger.js';
 
-import { PinoConfig } from './config';
+import { PinoConfig } from './config.js';
 
 export class PinoLogger implements ILogger {
   private logger: Logger;

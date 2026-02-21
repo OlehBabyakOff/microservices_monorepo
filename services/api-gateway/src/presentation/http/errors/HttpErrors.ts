@@ -1,7 +1,7 @@
-import { IErrorPayload } from '../../../shared/interfaces/ErrorPayload';
+import { IErrorPayload } from '../../../shared/interfaces/ErrorPayload.js';
 
-import { BaseError } from '../../../shared/errors/BaseError';
-import { HTTP_ERRORS } from '../../../shared/constants/errors';
+import { BaseError } from '../../../shared/errors/BaseError.js';
+import { HTTP_ERRORS } from '../../../shared/constants/errors.js';
 
 export class HttpError extends BaseError {
   constructor(statusCode: number, status: string, payload: IErrorPayload = {}) {

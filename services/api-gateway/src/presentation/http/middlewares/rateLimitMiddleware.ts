@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 import { Request, Response, NextFunction } from 'express';
 
-import { ILogger } from '../../../infrastructure/interfaces/Logger';
-import { ISlidingWindowRateLimit } from '../../../infrastructure/interfaces/SlidingWindowRateLimit';
+import { ILogger } from '../../../infrastructure/interfaces/Logger.js';
+import { ISlidingWindowRateLimit } from '../../../infrastructure/interfaces/SlidingWindowRateLimit.js';
 
 export function rateLimit(limiter: ISlidingWindowRateLimit, logger: ILogger) {
   const keyGenerator = (req: Request): string => {

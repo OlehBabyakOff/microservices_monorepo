@@ -1,12 +1,12 @@
 import { createProxyMiddleware, Options, RequestHandler } from 'http-proxy-middleware';
 import { IncomingMessage, ServerResponse } from 'http';
 
-import { IServiceProxy } from '../../presentation/http/interfaces/ServiceProxy';
-import { ILogger } from '../interfaces/Logger';
+import { IServiceProxy } from '../../presentation/http/interfaces/ServiceProxy.js';
+import { ILogger } from '../interfaces/Logger.js';
 
-import { createCircuitBreaker, CircuitBreakerType } from '../resilience/CircuitBreakerWrapper';
-import { InfrastructureError } from '../errors/InfrastructureError';
-import { SERVICES_NAMES } from '../../shared/constants/services';
+import { createCircuitBreaker, CircuitBreakerType } from '../resilience/CircuitBreakerWrapper.js';
+import { InfrastructureError } from '../errors/InfrastructureError.js';
+import { SERVICES_NAMES } from '../../shared/constants/services.js';
 
 export class HttpServiceProxy implements IServiceProxy {
   private handler: RequestHandler;

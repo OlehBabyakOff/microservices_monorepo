@@ -10,7 +10,7 @@ import { ISlidingWindowRateLimit } from '../../infrastructure/interfaces/Sliding
 import { ENV } from '../../shared/configs/env.js';
 
 import { rateLimit } from './middlewares/rateLimitMiddleware.js';
-import { errorHandler } from './middlewares/errorMiddleware';
+import { errorHandler } from './middlewares/errorMiddleware.js';
 import { requestLogger } from './middlewares/reqLoggerMiddleware.js';
 import { requestId } from './middlewares/reqIdMiddleware.js';
 

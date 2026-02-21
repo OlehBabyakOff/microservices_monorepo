@@ -1,6 +1,6 @@
-import { ITokenVerifier } from '../../domain/interfaces/TokenVerifier';
+import { ITokenVerifier } from '../../domain/interfaces/TokenVerifier.js';
 
-import { ApplicationError } from '../errors/ApplicationError';
+import { ApplicationError } from '../errors/ApplicationError.js';
 
 export class VerifyToken {
   constructor(private readonly tokenVerifier: ITokenVerifier) {}
