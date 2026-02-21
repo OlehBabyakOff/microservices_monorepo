@@ -1,6 +1,6 @@
 import CircuitBreaker from 'opossum';
 
-import { ILogger } from '../interfaces/Logger';
+import { ILogger } from '../interfaces/Logger.js';
 
 export function createCircuitBreaker<T extends (...args: any[]) => Promise<any>>(
   fn: T,

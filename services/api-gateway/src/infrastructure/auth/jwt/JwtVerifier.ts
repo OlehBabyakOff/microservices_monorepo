@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { ITokenVerifier } from '../../../domain/interfaces/TokenVerifier';
+import { ITokenVerifier } from '../../../domain/interfaces/TokenVerifier.js';
 
 export class JwtVerifier implements ITokenVerifier {
   constructor(private readonly publicKey: Buffer) {}

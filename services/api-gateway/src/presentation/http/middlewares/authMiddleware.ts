@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { IAuthMiddleware } from '../../http/interfaces/AuthMiddleware';
+import { IAuthMiddleware } from '../../http/interfaces/AuthMiddleware.js';
 
-import { VerifyToken } from '../../../application/use-cases/VerifyToken';
+import { VerifyToken } from '../../../application/use-cases/VerifyToken.js';
 
-import { HttpError } from '../errors/HttpErrors';
+import { HttpError } from '../errors/HttpErrors.js';
 
 export class AuthMiddleware implements IAuthMiddleware {
   constructor(private readonly verifyToken: VerifyToken) {}

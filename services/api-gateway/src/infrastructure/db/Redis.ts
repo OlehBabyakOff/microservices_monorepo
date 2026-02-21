@@ -1,9 +1,9 @@
 import Redis from 'ioredis';
 
-import { IRedisClient } from '../interfaces/Redis';
-import { ILogger } from '../interfaces/Logger';
+import { IRedisClient } from '../interfaces/Redis.js';
+import { ILogger } from '../interfaces/Logger.js';
 
-import { ENV } from '../../shared/configs/env';
+import { ENV } from '../../shared/configs/env.js';
 
 export class RedisClient implements IRedisClient {
   private static instance: Redis;

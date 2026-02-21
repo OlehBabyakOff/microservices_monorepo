@@ -1,4 +1,4 @@
-import { IErrorPayload } from '../interfaces/ErrorPayload';
+import { IErrorPayload } from '../interfaces/ErrorPayload.js';
 
 export class BaseError extends Error {
   public readonly statusCode: number;

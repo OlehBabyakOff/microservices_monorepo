@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { ILogger } from 'services/api-gateway/src/infrastructure/interfaces/Logger';
+import { ILogger } from 'services/api-gateway/src/infrastructure/interfaces/Logger.js';
 
-import { BaseError } from '../../../shared/errors/BaseError';
-import { INTERNAL_ERRORS } from '../../../shared/constants/errors';
+import { BaseError } from '../../../shared/errors/BaseError.js';
+import { INTERNAL_ERRORS } from '../../../shared/constants/errors.js';
 
 export function errorHandler(logger: ILogger) {
   return (err: Error, req: Request, res: Response, next: NextFunction) => {

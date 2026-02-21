@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import chalk from 'chalk';
 
-import { ILogger } from '../../../infrastructure/interfaces/Logger';
+import { ILogger } from '../../../infrastructure/interfaces/Logger.js';
 
 export function requestLogger(logger: ILogger) {
   return (req: Request, res: Response, next: NextFunction) => {

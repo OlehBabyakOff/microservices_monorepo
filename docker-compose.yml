@@ -3,13 +3,11 @@ version: '3.9'
 services:
   redis:
     image: redis:7-alpine
-    ports:
-      - '6379:6379'
     volumes:
-      - redis-dev-data:/data
+      - redis-prod-data:/data
     healthcheck:
       test: ['CMD', 'redis-cli', 'ping']
-      interval: 5s
+      interval: 10s
       timeout: 3s
       retries: 5
     restart: unless-stopped
@@ -18,23 +16,20 @@ services:
     build:
       context: .
       dockerfile: services/api-gateway/Dockerfile
-      target: dev
+      target: prod
       labels:
-        - 'env:dev'
-    image: api-gateway:dev
+        - 'env:prod'
+    image: api-gateway:prod
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./services/api-gateway/keys:/app/services/api-gateway/keys:ro
     ports:
-      - '3001:3001'
-      - '9229:9229'
+      - '3000:3000'
     env_file:
-      - services/api-gateway/.env
+      - services/api-gateway/.env.prod
     depends_on:
       redis:
         condition: service_healthy
-    restart: unless-stopped
 
 volumes:
-  redis-dev-data:
+  redis-prod-data:
 
