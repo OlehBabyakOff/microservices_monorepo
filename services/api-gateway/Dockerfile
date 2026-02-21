@@ -6,7 +6,7 @@ WORKDIR /app
 
 RUN corepack enable
 
-COPY ../../package.json ../../pnpm-lock.yaml ../../pnpm-workspace.yaml* ./
+COPY ../../package.json ../../pnpm-lock.yaml ../../pnpm-workspace.yaml* tsconfig.base.json ./
 
 RUN pnpm install --frozen-lockfile
 
@@ -30,6 +30,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 RUN apk add --no-cache curl \
+    && corepack enable \
     && addgroup -S nodejs \
     && adduser -S nodejs -G nodejs
 
@@ -41,6 +42,8 @@ COPY --from=build /app/services/api-gateway/dist ./dist
 RUN pnpm prune --prod
 
 EXPOSE 3000
+
+USER nodejs
 
 HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:3000/health || exit 1
