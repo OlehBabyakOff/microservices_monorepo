@@ -1,3 +1,4 @@
+import os from 'os';
 import express, { Response, Router, Express } from 'express';
 import helmet from 'helmet';
 import compression from 'compression';
@@ -46,7 +47,9 @@ export function createApp(
   }
 
   app.get('/health', (_, res: Response) =>
-    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() }),
+    res
+      .status(200)
+      .json({ status: 'ok', hostname: os.hostname(), timestamp: new Date().toISOString() }),
   );
 
   app.use('/api', rateLimit(limiter, logger), router);
