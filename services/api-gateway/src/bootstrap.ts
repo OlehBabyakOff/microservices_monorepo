@@ -3,7 +3,6 @@ import { FileKeyProvider } from './infrastructure/auth/FileKeyProvider.js';
 import { JwtVerifier } from './infrastructure/auth/jwt/JwtVerifier.js';
 import { HttpServiceProxy } from './infrastructure/proxy/HttpProxyAdapter.js';
 import { PinoLogger } from './infrastructure/logger/pino/Pino.js';
-import { SlidingWindowRateLimit } from './infrastructure/resilience/SlidingWindowRateLimit.js';
 import { AuthMiddleware } from './presentation/http/middlewares/authMiddleware.js';
 import { GatewayRouter } from './presentation/http/routes/gatewayRoutes.js';
 import { createApp } from './presentation/http/app.js';
@@ -26,7 +25,6 @@ export async function bootstrap(): Promise<void> {
     const redis = redisClient.getClient();
 
     const jwtVerifier = new JwtVerifier(keyProvider.getPublicKey());
-    const limiter = new SlidingWindowRateLimit(redis);
 
     // Use-cases
     const verifyToken = new VerifyToken(jwtVerifier);
@@ -40,7 +38,7 @@ export async function bootstrap(): Promise<void> {
 
     const router = new GatewayRouter(authMiddleware, authProxy, userProxy).create();
 
-    const app = createApp(router, limiter, logger);
+    const app = createApp(router, logger);
 
     process.on('uncaughtException', (err) => {
       logger.fatal('Uncaught Exception', err as Error);
