@@ -6,20 +6,14 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 import { ILogger } from '../../infrastructure/interfaces/Logger.js';
-import { ISlidingWindowRateLimit } from '../../infrastructure/interfaces/SlidingWindowRateLimit.js';
 
 import { ENV } from '../../shared/configs/env.js';
 
-import { rateLimit } from './middlewares/rateLimitMiddleware.js';
 import { errorHandler } from './middlewares/errorMiddleware.js';
 import { requestLogger } from './middlewares/reqLoggerMiddleware.js';
 import { requestId } from './middlewares/reqIdMiddleware.js';
 
-export function createApp(
-  router: Router,
-  limiter: ISlidingWindowRateLimit,
-  logger: ILogger,
-): Express {
+export function createApp(router: Router, logger: ILogger): Express {
   const app = express();
 
   app.set('trust proxy', true);
@@ -52,7 +46,7 @@ export function createApp(
       .json({ status: 'ok', hostname: os.hostname(), timestamp: new Date().toISOString() }),
   );
 
-  app.use('/api', rateLimit(limiter, logger), router);
+  app.use('/api', router);
 
   app.use(errorHandler(logger));
 
