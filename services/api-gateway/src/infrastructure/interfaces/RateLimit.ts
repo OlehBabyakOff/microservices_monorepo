@@ -1,4 +1,4 @@
-export interface ISlidingWindowRateLimit {
+export interface IRateLimit {
   isAllowed(key: string): Promise<{
     allowed: boolean;
     limit: number;

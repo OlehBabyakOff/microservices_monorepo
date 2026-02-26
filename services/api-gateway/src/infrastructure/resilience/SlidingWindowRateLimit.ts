@@ -1,10 +1,10 @@
 import { RedisType } from '../db/Redis';
 
-import { ISlidingWindowRateLimit } from '../interfaces/SlidingWindowRateLimit.js';
+import { IRateLimit } from '../interfaces/RateLimit.js';
 
 import { InfrastructureError } from '../errors/InfrastructureError.js';
 
-export class SlidingWindowRateLimit implements ISlidingWindowRateLimit {
+export class SlidingWindowRateLimit implements IRateLimit {
   private readonly windowMs: number;
   private readonly maxRequests: number;
   private readonly prefix: string;
