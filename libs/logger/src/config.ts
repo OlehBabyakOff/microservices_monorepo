@@ -1,7 +1,7 @@
 import os from 'os';
 import pino, { LoggerOptions } from 'pino';
 
-import { LoggerConfigOption } from './interfaces/logger-config.interface';
+import { LoggerConfigOption } from './interfaces/logger-config.interface.js';
 
 export function createPinoConfig(options: LoggerConfigOption): LoggerOptions {
   const isDev = options.pretty ?? false;
