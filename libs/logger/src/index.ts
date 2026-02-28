@@ -1,4 +1,4 @@
-export * from './logger.interface';
+export * from './interfaces/logger.interface';
 export * from './pino.logger';
 export * from './config';
 

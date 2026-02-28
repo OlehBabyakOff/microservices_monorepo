@@ -7,11 +7,3 @@ export interface Logger {
   fatal(message: string, error?: Error, meta?: Record<string, unknown>): void;
 }
 
-export interface LoggerConfigOption {
-  level: string;
-  service: string;
-  env: string;
-  pid?: number;
-  pretty?: boolean;
-}
-
