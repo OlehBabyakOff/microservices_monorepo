@@ -1,7 +1,7 @@
 import { createProxyMiddleware, Options, RequestHandler } from 'http-proxy-middleware';
 import { IncomingMessage, ServerResponse } from 'http';
 
-import { Logger } from '@libs/pino';
+import { Logger } from '@libs/logger';
 
 import { IServiceProxy } from '../../presentation/http/interfaces/ServiceProxy.js';
 

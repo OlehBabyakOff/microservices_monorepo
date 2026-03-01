@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { Request, Response, NextFunction } from 'express';
 
-import { Logger } from '@libs/pino';
+import { Logger } from '@libs/logger';
 import { IRateLimit } from '../../../infrastructure/interfaces/RateLimit.js';
 
 export function rateLimit(limiter: IRateLimit, logger: Logger) {

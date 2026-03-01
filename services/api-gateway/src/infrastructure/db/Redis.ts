@@ -1,6 +1,6 @@
 import Redis from 'ioredis';
 
-import { Logger } from '@libs/pino';
+import { Logger } from '@libs/logger';
 import { IRedisClient } from '../interfaces/Redis.js';
 
 import { ENV } from '../../shared/configs/env.js';

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { Logger } from '@libs/pino';
+import { Logger } from '@libs/logger';
 
 import { BaseError } from '../../../shared/errors/BaseError.js';
 import { INTERNAL_ERRORS } from '../../../shared/constants/errors.js';

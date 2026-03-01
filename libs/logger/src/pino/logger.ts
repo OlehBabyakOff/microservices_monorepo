@@ -1,6 +1,6 @@
 import pino, { Logger as LoggerInstance, LoggerOptions } from 'pino';
 
-import { Logger } from './interfaces/logger.interface.js';
+import { Logger } from '../logger.interface.js';
 
 export class PinoLogger implements Logger {
   private logger: LoggerInstance;

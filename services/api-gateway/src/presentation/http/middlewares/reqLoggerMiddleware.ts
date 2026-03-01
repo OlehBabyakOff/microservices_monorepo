@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import chalk from 'chalk';
 
-import { Logger } from '@libs/pino';
+import { Logger } from '@libs/logger';
 
 export function requestLogger(logger: Logger) {
   return (req: Request, res: Response, next: NextFunction) => {

@@ -1,6 +1,6 @@
 import { Express } from 'express';
 
-import { Logger } from '@libs/pino';
+import { Logger } from '@libs/logger';
 
 import { RedisType } from '../../infrastructure/db/Redis.js';
 

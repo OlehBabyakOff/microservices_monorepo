@@ -5,7 +5,7 @@ import compression from 'compression';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import { Logger } from '@libs/pino';
+import { Logger } from '@libs/logger';
 
 import { ENV } from '../../shared/configs/env.js';
 

@@ -1,6 +1,6 @@
 import CircuitBreaker from 'opossum';
 
-import { Logger } from '@libs/pino';
+import { Logger } from '@libs/logger';
 
 export function createCircuitBreaker<T extends (...args: any[]) => Promise<any>>(
   fn: T,

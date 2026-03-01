@@ -1,4 +1,4 @@
-import { PinoLogger, createPinoConfig } from '@libs/pino';
+import { PinoLogger, createPinoConfig } from '@libs/logger';
 import { RedisClient } from './infrastructure/db/Redis.js';
 import { FileKeyProvider } from './infrastructure/auth/FileKeyProvider.js';
 import { JwtVerifier } from './infrastructure/auth/jwt/JwtVerifier.js';
