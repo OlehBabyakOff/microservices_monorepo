@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { ILogger } from 'services/api-gateway/src/infrastructure/interfaces/Logger.js';
+import { Logger } from '@libs/pino';
 
 import { BaseError } from '../../../shared/errors/BaseError.js';
 import { INTERNAL_ERRORS } from '../../../shared/constants/errors.js';
 
-export function errorHandler(logger: ILogger) {
+export function errorHandler(logger: Logger) {
   return (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof BaseError) {
       return res.status(err.statusCode).json({

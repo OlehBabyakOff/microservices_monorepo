@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
 
+import { Logger } from '@libs/pino';
 import { IRedisClient } from '../interfaces/Redis.js';
-import { ILogger } from '../interfaces/Logger.js';
 
 import { ENV } from '../../shared/configs/env.js';
 
@@ -9,7 +9,7 @@ export class RedisClient implements IRedisClient {
   private static instance: Redis;
   private client: Redis;
 
-  constructor(private readonly logger: ILogger) {
+  constructor(private readonly logger: Logger) {
     if (!RedisClient.instance) {
       RedisClient.instance = new Redis({
         host: ENV.REDIS.HOST,

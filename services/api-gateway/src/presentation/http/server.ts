@@ -1,11 +1,12 @@
 import { Express } from 'express';
 
-import { ILogger } from '../../infrastructure/interfaces/Logger.js';
+import { Logger } from '@libs/pino';
+
 import { RedisType } from '../../infrastructure/db/Redis.js';
 
 import { ENV } from '../../shared/configs/env.js';
 
-export function startServer(app: Express, redis: RedisType, logger: ILogger): void {
+export function startServer(app: Express, redis: RedisType, logger: Logger): void {
   const server = app.listen(ENV.PORT, () => {
     logger.info(`Worker ${process.pid} running on port ${ENV.PORT}`);
   });

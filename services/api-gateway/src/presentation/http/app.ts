@@ -5,7 +5,7 @@ import compression from 'compression';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import { ILogger } from '../../infrastructure/interfaces/Logger.js';
+import { Logger } from '@libs/pino';
 
 import { ENV } from '../../shared/configs/env.js';
 
@@ -13,7 +13,7 @@ import { errorHandler } from './middlewares/errorMiddleware.js';
 import { requestLogger } from './middlewares/reqLoggerMiddleware.js';
 import { requestId } from './middlewares/reqIdMiddleware.js';
 
-export function createApp(router: Router, logger: ILogger): Express {
+export function createApp(router: Router, logger: Logger): Express {
   const app = express();
 
   app.set('trust proxy', true);
