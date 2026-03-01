@@ -1,17 +1,12 @@
-import pino, { Logger, LoggerOptions } from 'pino';
+import pino, { Logger as LoggerInstance, LoggerOptions } from 'pino';
 
-import { ILogger } from '../../interfaces/Logger.js';
+import { Logger } from '../logger.interface.js';
 
-import { PinoConfig } from './config.js';
-
-export class PinoLogger implements ILogger {
-  private logger: Logger;
+export class PinoLogger implements Logger {
+  private logger: LoggerInstance;
 
   constructor(options?: LoggerOptions) {
-    this.logger = pino({
-      ...PinoConfig,
-      ...options,
-    });
+    this.logger = pino(options);
   }
 
   info(message: string, meta?: Record<string, unknown>): void {

@@ -1,10 +1,10 @@
 import crypto from 'crypto';
 import { Request, Response, NextFunction } from 'express';
 
-import { ILogger } from '../../../infrastructure/interfaces/Logger.js';
+import { Logger } from '@libs/logger';
 import { IRateLimit } from '../../../infrastructure/interfaces/RateLimit.js';
 
-export function rateLimit(limiter: IRateLimit, logger: ILogger) {
+export function rateLimit(limiter: IRateLimit, logger: Logger) {
   const keyGenerator = (req: Request): string => {
     const ip = req.headers['x-forwarded-for']?.toString().split(',')[0].trim() || req.ip;
 

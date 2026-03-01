@@ -1,8 +1,8 @@
+import { PinoLogger, createPinoConfig } from '@libs/logger';
 import { RedisClient } from './infrastructure/db/Redis.js';
 import { FileKeyProvider } from './infrastructure/auth/FileKeyProvider.js';
 import { JwtVerifier } from './infrastructure/auth/jwt/JwtVerifier.js';
 import { HttpServiceProxy } from './infrastructure/proxy/HttpProxyAdapter.js';
-import { PinoLogger } from './infrastructure/logger/pino/Pino.js';
 import { AuthMiddleware } from './presentation/http/middlewares/authMiddleware.js';
 import { GatewayRouter } from './presentation/http/routes/gatewayRoutes.js';
 import { createApp } from './presentation/http/app.js';
@@ -12,7 +12,15 @@ import { VerifyToken } from './application/use-cases/VerifyToken.js';
 import { ENV } from './shared/configs/env.js';
 
 export async function bootstrap(): Promise<void> {
-  const logger = new PinoLogger();
+  const logger = new PinoLogger(
+    createPinoConfig({
+      level:
+        ENV.NODE_ENV === ENV.ENVIRONMENTS.DEVELOPMENT ? ENV.LOG_LEVELS.DEBUG : ENV.LOG_LEVELS.INFO,
+      service: ENV.SERVICE_NAME,
+      env: ENV.NODE_ENV,
+      pretty: ENV.NODE_ENV === ENV.ENVIRONMENTS.DEVELOPMENT,
+    }),
+  );
 
   try {
     // Provider

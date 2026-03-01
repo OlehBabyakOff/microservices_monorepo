@@ -2,13 +2,22 @@ import cluster from 'cluster';
 import os from 'os';
 
 import { bootstrap } from './bootstrap.js';
-import { PinoLogger } from './infrastructure/logger/pino/Pino.js';
+import { PinoLogger, createPinoConfig } from '@libs/logger';
 
 import { ENV } from './shared/configs/env.js';
 
 const cpuCount = os.availableParallelism();
 
-const logger = new PinoLogger();
+const logger = new PinoLogger(
+  createPinoConfig({
+    level:
+      ENV.NODE_ENV === ENV.ENVIRONMENTS.DEVELOPMENT ? ENV.LOG_LEVELS.DEBUG : ENV.LOG_LEVELS.INFO,
+    service: ENV.SERVICE_NAME,
+    env: ENV.NODE_ENV,
+    pid: process.pid,
+    pretty: ENV.NODE_ENV === ENV.ENVIRONMENTS.DEVELOPMENT,
+  }),
+);
 
 async function startWorker(): Promise<void> {
   try {

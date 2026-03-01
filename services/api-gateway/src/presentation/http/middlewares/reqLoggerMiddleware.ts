@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import chalk from 'chalk';
 
-import { ILogger } from '../../../infrastructure/interfaces/Logger.js';
+import { Logger } from '@libs/logger';
 
-export function requestLogger(logger: ILogger) {
+export function requestLogger(logger: Logger) {
   return (req: Request, res: Response, next: NextFunction) => {
     const start = process.hrtime.bigint();
 

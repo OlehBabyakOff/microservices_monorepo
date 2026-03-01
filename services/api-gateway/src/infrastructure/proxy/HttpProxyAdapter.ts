@@ -1,8 +1,9 @@
 import { createProxyMiddleware, Options, RequestHandler } from 'http-proxy-middleware';
 import { IncomingMessage, ServerResponse } from 'http';
 
+import { Logger } from '@libs/logger';
+
 import { IServiceProxy } from '../../presentation/http/interfaces/ServiceProxy.js';
-import { ILogger } from '../interfaces/Logger.js';
 
 import { createCircuitBreaker, CircuitBreakerType } from '../resilience/CircuitBreakerWrapper.js';
 import { InfrastructureError } from '../errors/InfrastructureError.js';
@@ -14,7 +15,7 @@ export class HttpServiceProxy implements IServiceProxy {
 
   constructor(
     target: string,
-    logger: ILogger,
+    logger: Logger,
     changeOrigin: Options['changeOrigin'] = true,
     pathRewrite?: Options['pathRewrite'],
   ) {

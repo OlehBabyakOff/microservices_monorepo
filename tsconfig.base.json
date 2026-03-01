@@ -9,7 +9,7 @@
     "noImplicitAny": true,
     "baseUrl": ".",
     "paths": {
-      // "@common/*": ["libs/common/src/*"]
+      "@libs/*": ["libs/*/dist"]
     },
     "typeRoots": ["./node_modules/@types", "./@types"]
   },
