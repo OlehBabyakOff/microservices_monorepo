@@ -34,12 +34,10 @@ export class SlidingWindowRateLimit implements IRateLimit {
 
         local window_start = now - window_size
 
-        -- Memory leak protection: remove expired entries
         redis.call('ZREMRANGEBYSCORE', key, '-inf', window_start)
 
         local current_count = redis.call('ZCARD', key)
 
-        -- Optional safety cap against abuse
         if current_count > max_requests * 2 then
             redis.call('ZREMRANGEBYRANK', key, 0, current_count - max_requests)
             current_count = redis.call('ZCARD', key)
@@ -60,7 +58,6 @@ export class SlidingWindowRateLimit implements IRateLimit {
 
         redis.call('ZADD', key, now, request_id)
 
-        -- TTL cleanup for inactive users
         redis.call('PEXPIRE', key, window_size)
 
         return {1, current_count + 1, 0}
